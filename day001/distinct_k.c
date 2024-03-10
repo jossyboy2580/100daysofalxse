@@ -105,6 +105,7 @@ int main(void)
 	size_t initial_buff_size = 0;
 	ssize_t status;
 	str_freq *nodes = NULL;
+	str_freq *next_node;
 
 
 	status = getline(&buff, &initial_buff_size, stdin);
@@ -123,5 +124,12 @@ int main(void)
 		k = atoi(buff);
 	free(buff);
 	printf("%s", get_distinct_k(nodes, k));
+	while (nodes != NULL)
+	{
+		next_node = nodes->next;
+		free(nodes->str);
+		free(nodes);
+		nodes = next_node;
+	}
 	return (0);
 }
